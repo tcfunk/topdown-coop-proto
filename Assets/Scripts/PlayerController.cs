@@ -1,10 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using MLAPI;
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerMotor))]
-public class PlayerController : MonoBehaviour
+public class PlayerController : NetworkBehaviour
 {
     public Interactable focus;
     public LayerMask movementMask;
@@ -28,14 +29,15 @@ public class PlayerController : MonoBehaviour
         {
             inputType = ctx.control.device.name;
 
-            if (inputType == "Mouse")
-            {
-                MouseMove(controls.Look.ReadValue<Vector2>());
-            }
-            else
-            {
+            // if (inputType == "Mouse")
+            // {
+            //     MouseMove(controls.Look.ReadValue<Vector2>());
+            // }
+            // if(false)
+            // else
+            // {
                 inputDirection = ctx.ReadValue<Vector2>();
-            }
+            // }
         };
     }
 
@@ -55,15 +57,18 @@ public class PlayerController : MonoBehaviour
         motor = GetComponent<PlayerMotor>();
     }
 
-    void MouseMove(Vector2 mousePosition)
-    {
-        Ray ray = cam.ScreenPointToRay(mousePosition);
-        if (Physics.Raycast(ray, out var hit, 100, movementMask))
-        {
-            motor.MoveToPoint(hit.point);
-        }
-        RemoveFocus();
-    }
+    // void MouseMove(Vector2 mousePosition)
+    // {
+    //     if (cam)
+    //     {
+    //         Ray ray = cam.ScreenPointToRay(mousePosition);
+    //         if (Physics.Raycast(ray, out var hit, 100, movementMask))
+    //         {
+    //             motor.MoveToPoint(hit.point);
+    //         }
+    //         RemoveFocus();
+    //     }
+    // }
 
     void GamepadMove(Vector2 direction)
     {

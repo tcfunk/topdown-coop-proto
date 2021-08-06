@@ -38,17 +38,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""48769af3-0e9d-4f93-88e7-6e804d3528a6"",
-                    ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""10224877-a017-481b-abba-cb3b5b0818dc"",
                     ""path"": ""<Gamepad>/leftStick"",
                     ""interactions"": """",
@@ -61,7 +50,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 {
                     ""name"": ""WASD"",
                     ""id"": ""45d02fb8-48da-47ba-880f-1d7984d40d5c"",
-                    ""path"": ""2DVector"",
+                    ""path"": ""2DVector(mode=1)"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

@@ -1,10 +1,13 @@
+using MLAPI;
+using MLAPI.Prototyping;
 using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
-public class PlayerMotor : MonoBehaviour
+public class PlayerMotor : NetworkBehaviour
 {
-    public bool updatePosition = false;
+    public bool useAgentSpeed = true;
+    public bool useDeltaTime = true;
     public float movementSmoothing = 0.3f;
     
     private NavMeshAgent agent;
@@ -22,11 +25,6 @@ public class PlayerMotor : MonoBehaviour
             agent.SetDestination(target.interactionTransform.position);
             FaceTarget();
         }
-
-        if (!agent.updatePosition && updatePosition)
-        {
-            transform.position = Vector3.Lerp(transform.position, agent.nextPosition, movementSmoothing);
-        }
     }
 
     public void MoveToPoint(Vector3 destination)
@@ -38,6 +36,8 @@ public class PlayerMotor : MonoBehaviour
     public void MoveInDirection(Vector3 direction)
     {
         var movement = direction;
+        if (useAgentSpeed) movement *= agent.speed;
+        if (useDeltaTime) movement *= Time.deltaTime;
         
         if (NavMesh.SamplePosition(transform.position + movement, out var navMeshHit, 100f, NavMesh.AllAreas))
         {
